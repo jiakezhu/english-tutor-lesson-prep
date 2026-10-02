@@ -1,0 +1,13 @@
+{
+  "name": "lessonfold-student-platform",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "start": "node src/server.js",
+    "setup": "node src/cli.js setup",
+    "demo": "node src/cli.js demo",
+    "test": "node --test test/*.test.js"
+  }
+}

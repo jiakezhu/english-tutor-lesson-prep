@@ -1,0 +1,36 @@
+{
+  "schema_version": "lesson-publication.v1",
+  "publication_id": "pub_001",
+  "tenant_id": "org_demo",
+  "lesson_id": "lesson_002",
+  "class_id": "class_01",
+  "recipient_student_ids": [
+    "student_01"
+  ],
+  "preparation_id": "prep_001",
+  "content_revision": 1,
+  "context_version_used": "ctx_demo",
+  "title": "借还情境练习",
+  "approved_by": "teacher_01",
+  "approved_at": "2026-10-02T06:30:00.000Z",
+  "supersedes_publication_id": null,
+  "assets": [
+    {
+      "asset_id": "asset_student",
+      "audience": "student",
+      "format": "text/plain",
+      "body": "May I ___ your book?\nCould you ___ me a pencil?"
+    },
+    {
+      "asset_id": "asset_teacher",
+      "audience": "teacher",
+      "format": "text/plain",
+      "body": "答案：borrow；lend。"
+    }
+  ],
+  "provenance": {
+    "content_method": "teacher_authored",
+    "teacher_reviewed": true
+  },
+  "content_hash": "sha256:e8b9d91043f2acfadb5db8e28b9fcf48d9e44e2ca4ab023b89495dc3dbd7cabf"
+}

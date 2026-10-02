@@ -1,0 +1,5 @@
+data
+.env
+*.sqlite*
+node_modules
+test

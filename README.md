@@ -253,3 +253,11 @@ Intelligence (Claude + SKILL.md) and rendering (Node.js + generate_lesson.js) ar
 ## License · 许可证
 
 MIT
+
+---
+
+## Student Management Platform · 学生管理平台
+
+[`student-platform/`](student-platform/README.md) adds an independent Node.js 24+ / SQLite web application for student profiles, classes, lesson scheduling, attendance, teacher-confirmed learning evidence, homework/retests, and the student-system side of Lessonfold integration. Existing lesson generation scripts, reference content, and Skill instructions remain unchanged. Start with `cd student-platform && node src/cli.js demo`, then `node src/server.js`; the CLI creates fictional data and prints a random demo password.
+
+学生管理平台包含权限隔离、一次性备课入口、已确认学情读取和不可变讲义归档；运行与验收步骤见上方文档，机器可验证的接口见 [`integration-contracts/`](integration-contracts/README.md)。外部 Lessonfold 需要另行实现接收端与发布同步，配置地址本身不代表已完成跨系统联调。

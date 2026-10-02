@@ -1,0 +1,57 @@
+{
+  "schema_version": "teaching-context.v1",
+  "tenant_id": "org_demo",
+  "teacher_id": "teacher_01",
+  "lesson_id": "lesson_002",
+  "context_version": "ctx_demo",
+  "generated_at": "2026-10-02T06:00:00.000Z",
+  "lesson": {
+    "class_id": "class_01",
+    "starts_at": "2026-10-04T06:00:00.000Z",
+    "status": "scheduled",
+    "school_stage": "junior_secondary",
+    "school_grade": 8,
+    "curriculum": {
+      "edition_id": null,
+      "edition_name": null,
+      "book_id": null,
+      "unit_id": null,
+      "confirmation_status": "pending_teacher_confirmation"
+    },
+    "planned_objectives": [
+      "词义辨析复测"
+    ]
+  },
+  "students": [
+    {
+      "student_id": "student_01",
+      "display_name": "测试学生甲",
+      "recent_confirmed_observations": [
+        {
+          "observation_id": "obs_001",
+          "source_lesson_id": "lesson_001",
+          "observed_at": "2026-09-30T07:00:00.000Z",
+          "domain": "vocabulary",
+          "knowledge_point": "borrow / lend",
+          "observed_response": "将 borrow 写为 lend",
+          "result": "incorrect",
+          "score": null,
+          "evidence_ref": null,
+          "status": "teacher_confirmed",
+          "confirmed_by": "teacher_01",
+          "confirmed_at": "2026-09-30T07:20:00.000Z",
+          "next_action": "用借还情境复测"
+        }
+      ],
+      "follow_ups": [
+        {
+          "id": "followup_001",
+          "type": "retest",
+          "description": "复测 borrow / lend",
+          "due_at": null
+        }
+      ],
+      "history_truncated": false
+    }
+  ]
+}

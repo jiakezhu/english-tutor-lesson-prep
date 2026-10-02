@@ -1,0 +1,366 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "teaching-context.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "teaching-context.v1"
+    },
+    "tenant_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "teacher_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "lesson_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "context_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$"
+    },
+    "lesson": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "class_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "starts_at": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$"
+        },
+        "status": {
+          "enum": [
+            "scheduled",
+            "completed",
+            "cancelled"
+          ]
+        },
+        "school_stage": {
+          "enum": [
+            "primary",
+            "junior_secondary",
+            "senior_secondary"
+          ]
+        },
+        "school_grade": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12
+        },
+        "curriculum": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "edition_id": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "edition_name": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "book_id": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "unit_id": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "confirmation_status": {
+              "enum": [
+                "teacher_confirmed",
+                "pending_teacher_confirmation"
+              ]
+            }
+          },
+          "required": [
+            "edition_id",
+            "edition_name",
+            "book_id",
+            "unit_id",
+            "confirmation_status"
+          ]
+        },
+        "planned_objectives": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          }
+        }
+      },
+      "required": [
+        "class_id",
+        "starts_at",
+        "status",
+        "school_stage",
+        "school_grade",
+        "curriculum",
+        "planned_objectives"
+      ]
+    },
+    "students": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "student_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "display_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "recent_confirmed_observations": {
+            "type": "array",
+            "maxItems": 30,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "observation_id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                },
+                "source_lesson_id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                },
+                "observed_at": {
+                  "type": "string",
+                  "format": "date-time",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$"
+                },
+                "domain": {
+                  "enum": [
+                    "vocabulary",
+                    "grammar",
+                    "reading",
+                    "listening",
+                    "speaking",
+                    "writing"
+                  ]
+                },
+                "knowledge_point": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 500
+                },
+                "observed_response": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 5000
+                },
+                "result": {
+                  "enum": [
+                    "correct",
+                    "incorrect",
+                    "partially_correct",
+                    "not_assessed"
+                  ]
+                },
+                "score": {
+                  "anyOf": [
+                    {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 100
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "evidence_ref": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 200
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "status": {
+                  "const": "teacher_confirmed"
+                },
+                "confirmed_by": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                },
+                "confirmed_at": {
+                  "type": "string",
+                  "format": "date-time",
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$"
+                },
+                "next_action": {
+                  "type": "string",
+                  "maxLength": 2000
+                }
+              },
+              "required": [
+                "observation_id",
+                "source_lesson_id",
+                "observed_at",
+                "domain",
+                "knowledge_point",
+                "observed_response",
+                "result",
+                "score",
+                "evidence_ref",
+                "status",
+                "confirmed_by",
+                "confirmed_at",
+                "next_action"
+              ],
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "result": {
+                        "const": "not_assessed"
+                      }
+                    }
+                  },
+                  "then": {
+                    "properties": {
+                      "score": {
+                        "type": "null"
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "follow_ups": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                },
+                "type": {
+                  "enum": [
+                    "homework",
+                    "retest",
+                    "teacher_advice"
+                  ]
+                },
+                "description": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 2000
+                },
+                "due_at": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "format": "date-time",
+                      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "type",
+                "description",
+                "due_at"
+              ]
+            }
+          },
+          "history_truncated": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "student_id",
+          "display_name",
+          "recent_confirmed_observations",
+          "follow_ups",
+          "history_truncated"
+        ]
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "tenant_id",
+    "teacher_id",
+    "lesson_id",
+    "context_version",
+    "generated_at",
+    "lesson",
+    "students"
+  ]
+}

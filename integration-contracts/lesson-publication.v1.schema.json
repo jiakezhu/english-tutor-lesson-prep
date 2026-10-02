@@ -1,0 +1,174 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "lesson-publication.v1",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "lesson-publication.v1"
+    },
+    "publication_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "tenant_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "lesson_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "class_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "recipient_student_ids": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 200,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 200
+      }
+    },
+    "preparation_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "content_revision": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 9007199254740991
+    },
+    "context_version_used": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "approved_by": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "approved_at": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d{3})?Z$"
+    },
+    "content_hash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    },
+    "supersedes_publication_id": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "assets": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "asset_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "audience": {
+            "enum": [
+              "student",
+              "teacher"
+            ]
+          },
+          "format": {
+            "const": "text/plain"
+          },
+          "body": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 250000
+          }
+        },
+        "required": [
+          "asset_id",
+          "audience",
+          "format",
+          "body"
+        ]
+      },
+      "contains": {
+        "type": "object",
+        "properties": {
+          "audience": {
+            "const": "student"
+          }
+        },
+        "required": [
+          "audience"
+        ]
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "content_method": {
+          "enum": [
+            "rule_based",
+            "model_generated",
+            "teacher_authored",
+            "mixed"
+          ]
+        },
+        "teacher_reviewed": {
+          "const": true
+        }
+      },
+      "required": [
+        "content_method",
+        "teacher_reviewed"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "publication_id",
+    "tenant_id",
+    "lesson_id",
+    "class_id",
+    "recipient_student_ids",
+    "preparation_id",
+    "content_revision",
+    "context_version_used",
+    "title",
+    "approved_by",
+    "approved_at",
+    "content_hash",
+    "supersedes_publication_id",
+    "assets",
+    "provenance"
+  ]
+}
